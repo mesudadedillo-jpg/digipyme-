@@ -115,17 +115,31 @@
       font-weight:bold;
     }
 
-    .empty-space{
-      height:200px;
-      border:2px dashed #2f2f2f;
-      border-radius:20px;
-      margin-top:50px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:#555;
-      font-size:14px;
-    }
+     .empty-space{  
+      height:200px;  
+      border:2px dashed #2f2f2f;  
+      border-radius:20px;  
+      margin-top:50px;  
+      display:flex;  
+      justify-content:center;  
+      align-items:center;  
+      color:#555;  
+      font-size:14px;  
+    }  
+    .banana{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:110px;
+  border-radius:12px;
+  transform:rotate(-10deg);
+  transition:0.3s;
+  box-shadow:0 0 15px rgba(255,255,0,0.2);
+}
+
+.banana:hover{
+  transform:rotate(10deg) scale(1.08);
+}
 
   </style>
 </head>
@@ -135,7 +149,7 @@
 
     <div class="logo">DYSHAN WEB</div>
 
-    <div class="day">Día 0</div>
+    <div class="day">Día 1</div>
 
     <div class="subtitle">
       Internet controlará esta página web.
@@ -162,17 +176,21 @@
         <li>✔ Página creada</li>
         <li>✔ mensajito inicial</li>
         <li>✔ El botón que claramente no debes presionar</li>
+        <li>🍌 alguien comentó “un mugroso plátano” y apareció esto</li>
       </ul>
     </div>
 
     <div class="empty-space">
-      .
+      <img 
+src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"
+class="banana"
+alt="Un mugroso plátano">
     </div>
 
     <div class="footer">
       Comenta algo y podría aparecer mañana.<br><br>
       <span>Reglas:</span><br>
-    pno hay reglas (ahun)</br>
+    no hay reglas (aún)</br>
 
     </div>
 

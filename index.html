@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DigiPyme — Soluciones Digitales para tu Negocio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent3: #f97316;
+      --text: #f0f0f8;
+      --muted: #8888aa;
+      --border: rgba(255,255,255,0.07);
+      --glow: 0 0 40px rgba(0,229,255,0.15);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent);
+      color: #000 !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 5% 4rem;
+      position: relative;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+      top: 30%;
+      right: 10%;
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(0,229,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(0,229,255,0.45); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+    /* STATS */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      padding: 3rem 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+    /* SECTION COMMONS */
+    section { position: relative; z-index: 1; }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* SERVICES */
+    #servicios {
+      padding: 6rem 5%;
+    }
+    .services-header { margin-bottom: 3.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .service-card:hover { background: #1c1c2a; }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .service-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      background: rgba(0,229,255,0.08);
+      color: var(--accent);
+    }
+
+    /* EJEMPLOS / PORTFOLIO */
+    #ejemplos {
+      padding: 6rem 5%;
+      background: linear-gradient(to bottom, transparent, rgba(124,58,237,0.04), transparent);
+    }
+    .ejemplos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .ejemplos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .ejemplo-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .ejemplo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .ejemplo-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ejemplo-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.5));
+    }
+    .t1 { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); }
+    .t2 { background: linear-gradient(135deg, #2d1b0e, #5c2a0c, #8b4513); }
+    .t3 { background: linear-gradient(135deg, #0d1f12, #1a3a25, #2d6a45); }
+    .t4 { background: linear-gradient(135deg, #1f0d29, #3d1558, #6b2fa0); }
+    .t5 { background: linear-gradient(135deg, #1a0a00, #cc3300, #ff6600); }
+    .t6 { background: linear-gradient(135deg, #0a1628, #1e3a5f, #2563eb); }
+    .t7 { background: linear-gradient(135deg, #1a0a0a, #8b0000, #dc2626); }
+    .ejemplo-info { padding: 1.2rem 1.4rem; }
+    .ejemplo-info h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .ejemplo-info p { font-size: 0.82rem; color: var(--muted); }
+    .ejemplo-badge {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+    .badge-custom { background: rgba(249,115,22,0.12); color: var(--accent3); }
+    .badge-demo { background: rgba(0,229,255,0.1); color: var(--accent); }
+
+    /* PROCESO */
+    #proceso {
+      padding: 6rem 5%;
+    }
+    .proceso-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      counter-reset: steps;
+    }
+    .paso {
+      counter-increment: steps;
+      position: relative;
+      padding-left: 1rem;
+    }
+    .paso::before {
+      content: '0' counter(steps);
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(0,229,255,0.08);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .paso h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .paso p { font-size: 0.87rem; color: var(--muted); }
+
+    /* CTA WHATSAPP */
+    #contacto {
+      padding: 6rem 5%;
+      text-align: center;
+    }
+    .cta-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,229,255,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .cta-box p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #25d366;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(37,211,102,0.45); }
+    .btn-whatsapp svg { width: 22px; height: 22px; fill: currentColor; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .logo { font-size: 1.2rem; }
+    footer p { font-size: 0.82rem; color: var(--muted); }
+    footer nav ul { gap: 1.5rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FLOATING WA BUTTON */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      width: 56px; height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .stats-bar { gap: 2rem; }
+      .ejemplos-header { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; text-align: center; }
+      footer nav ul { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Digi<span>Pyme</span></a>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#ejemplos">Ejemplos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto" class="nav-cta">Contáctame</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#00e5ff"/></svg>
+      Disponible para proyectos
+    </div>
+    <h1>Tu negocio,<br/>en <em>digital.</em></h1>
+    <p>Páginas web, apps y bases de datos a medida para PyMEs y emprendedores. Rápido, profesional y accesible.</p>
+    <div class="hero-btns">
+      <a href="#ejemplos" class="btn-primary">Ver ejemplos</a>
+      <a href="https://wa.me/527753602078?text=Hola!%20Vi%20DigiPyme%20y%20me%20interesa%20saber%20más%20sobre%20sus%20servicios." target="_blank" class="btn-secondary">Hablar por WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Código limpio y tuyo</div></div>
+  <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Entrega rápida</div></div>
+  <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Ideas posibles</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Plantillas genéricas</div></div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="services-header">
+    <div class="section-tag">¿Qué hago?</div>
+    <h2 class="section-title">Servicios digitales<br/>para tu negocio</h2>
+    <p class="section-subtitle">Todo lo que tu negocio necesita para crecer online, desde cero o mejorando lo que ya tienes.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Páginas Web de Negocio</h3>
+      <p>Sitios profesionales con diseño a medida para restaurantes, tiendas, despachos, consultorios y más.</p>
+      <span class="service-tag">Más popular</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚀</div>
+      <h3>Landing Pages</h3>
+      <p>Páginas de aterrizaje que convierten visitas en clientes. Para lanzamientos, servicios o campañas.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Apps Sencillas</h3>
+      <p>Aplicaciones web ligeras: agendas, cotizadores, formularios inteligentes, portales para clientes.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🗄️</div>
+      <h3>Bases de Datos</h3>
+      <p>Organiza tu inventario, clientes o pedidos con una base de datos fácil de usar y mantener.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Diseño UI/UX</h3>
+      <p>Interfaces bonitas y fáciles de navegar. Tus clientes disfrutarán usar tu plataforma.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Mantenimiento & Soporte</h3>
+      <p>Actualizo, mejoro y cuido tu web existente. Sin contratos largos ni letra chica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EJEMPLOS -->
+<section id="ejemplos">
+  <div class="ejemplos-header">
+    <div>
+      <div class="section-tag">Demos interactivos</div>
+      <h2 class="section-title">Mira lo que<br/>puedo hacer</h2>
+    </div>
+    <p class="section-subtitle" style="max-width:300px;">Haz clic en cualquier ejemplo para verlo en vivo. ¿Tienes una idea distinta? Tengo un constructor para ti.</p>
+  </div>
+  <div class="ejemplos-grid">
+
+    <!-- CREAR TU IDEA - Destacado -->
+    <a href="ejemplos/constructor.html" class="ejemplo-card" style="border-color:rgba(249,115,22,0.3);">
+      <div class="ejemplo-thumb t5" style="height:220px;">
+        <span style="font-size:4rem;position:relative;z-index:1;">✨</span>
+        <div style="position:absolute;bottom:1rem;left:1.2rem;z-index:1;font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;">Crea tu propia idea</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>Constructor Visual</h4>
+        <p>Diseña tu página: elige colores, tipografía, logo, botones y secciones. Cuando termines, mándame el diseño por WhatsApp.</p>
+        <span class="ejemplo-badge badge-custom">✦ Personalizable</span>
+      </div>
+    </a>
+
+    <!-- RESTAURANTE -->
+    <a href="ejemplos/restaurante.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t2">
+        <span style="position:relative;z-index:1;">🍽️</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Restaurante</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>El Fogón — Restaurante</h4>
+        <p>Menú digital, reservaciones por WhatsApp y galería de platillos.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+    <!-- TIENDA DE ROPA -->
+    <a href="ejemplos/ropa.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t4">
+        <span style="position:relative;z-index:1;">👗</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Tienda de Ropa</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>Nova Boutique — Moda</h4>
+        <p>Catálogo de prendas con filtros, carrito de compras y pedidos por WhatsApp.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+    <!-- ZAPATERÍA -->
+    <a href="ejemplos/zapatos.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t1">
+        <span style="position:relative;z-index:1;">👟</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Zapatería</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>StepUp — Calzado</h4>
+        <p>Galería de modelos, tallas disponibles y botón de pedido directo.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+    <!-- COMIDA MEXICANA -->
+    <a href="ejemplos/mexicana.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t3">
+        <span style="position:relative;z-index:1;">🌮</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Comida Mexicana</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>Sabor de México — Antojitos</h4>
+        <p>Menú de antojitos, pedidos para llevar y sección de promociones.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+    <!-- BARBERÍA -->
+    <a href="ejemplos/barberia.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t7">
+        <span style="position:relative;z-index:1;">✂️</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Barbería</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>Blade & Co — Barbería</h4>
+        <p>Servicios, galería de cortes y reserva de cita por WhatsApp.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+    <!-- CONSULTORIO -->
+    <a href="ejemplos/consultorio.html" class="ejemplo-card">
+      <div class="ejemplo-thumb t6">
+        <span style="position:relative;z-index:1;">🏥</span>
+        <div style="position:absolute;bottom:0.8rem;left:1rem;z-index:1;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Consultorio</div>
+      </div>
+      <div class="ejemplo-info">
+        <h4>Dr. García — Consultorio</h4>
+        <p>Especialidades, horarios de consulta y contacto directo con el médico.</p>
+        <span class="ejemplo-badge badge-demo">Demo</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-tag">¿Cómo funciona?</div>
+  <h2 class="section-title">De idea a realidad<br/>en 4 pasos</h2>
+  <div class="proceso-steps">
+    <div class="paso">
+      <h4>Conversamos</h4>
+      <p>Me cuentas qué necesitas, para qué y cuándo. Sin tecnicismos, sin formularios largos.</p>
+    </div>
+    <div class="paso">
+      <h4>Propuesta</h4>
+      <p>Te mando una propuesta clara con precio, tiempo de entrega y qué incluye exactamente.</p>
+    </div>
+    <div class="paso">
+      <h4>Desarrollo</h4>
+      <p>Construyo tu proyecto con actualizaciones constantes. Tú apruebas cada etapa.</p>
+    </div>
+    <div class="paso">
+      <h4>Entrega</h4>
+      <p>Recibes tu proyecto listo para publicar, con soporte post-entrega incluido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA CONTACTO -->
+<section id="contacto">
+  <div class="cta-box">
+    <h2>¿Tienes un proyecto<br/>en mente?</h2>
+    <p>Escríbeme ahora y en menos de 24 horas tienes una propuesta personalizada.</p>
+    <a href="https://wa.me/527753602078?text=Hola!%20Vi%20DigiPyme%20y%20quiero%20platicar%20sobre%20mi%20proyecto." target="_blank" class="btn-whatsapp">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">Digi<span>Pyme</span></a>
+  <p>© 2025 DigiPyme. Hecho con código y café.</p>
+  <nav><ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#ejemplos">Ejemplos</a></li>
+    <li><a href="https://wa.me/527753602078" target="_blank">WhatsApp</a></li>
+  </ul></nav>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/527753602078?text=Hola!%20Estoy%20en%20DigiPyme%20y%20me%20interesa%20un%20proyecto." target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>

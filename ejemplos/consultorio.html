@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dra. Valeria Reyes — Consultorio | Demo DigiPyme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#f7f5f2;--white:#ffffff;--navy:#0f2340;--teal:#1a6b72;--teal2:#229ea8;--sage:#8aab9a;--cream:#faf9f6;--muted:#7a8a88;--light:#e8eeed;--gold:#c9a84c;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--navy);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 6%;background:rgba(247,245,242,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,107,114,0.1);}
+    .logo-wrap{display:flex;flex-direction:column;line-height:1.1;}
+    .logo-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy);}
+    .logo-title{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);}
+    nav ul{display:flex;gap:2rem;list-style:none;}
+    nav ul a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.04em;transition:color .2s;}
+    nav ul a:hover{color:var(--navy);}
+    .cita-btn{background:var(--teal);color:#fff;padding:.55rem 1.4rem;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-decoration:none;transition:background .2s;}
+    .cita-btn:hover{background:var(--navy);}
+
+    /* HERO */
+    .hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;}
+    .hero-left{background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:8rem 6% 5rem;position:relative;overflow:hidden;}
+    .hero-left::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(26,107,114,.12);}
+    .hero-left::after{content:'';position:absolute;bottom:-60px;left:-60px;width:250px;height:250px;border-radius:50%;background:rgba(138,171,154,.08);}
+    .hero-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:1.05;color:#fff;margin-bottom:1.5rem;font-weight:600;}
+    .hero h1 em{color:var(--teal2);font-style:italic;}
+    .hero-desc{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.9;max-width:400px;font-weight:300;margin-bottom:2.5rem;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-teal{background:var(--teal);color:#fff;padding:.85rem 2rem;font-size:.85rem;font-weight:600;text-decoration:none;transition:background .2s;}
+    .btn-teal:hover{background:var(--teal2);}
+    .btn-outline{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);padding:.85rem 2rem;font-size:.85rem;text-decoration:none;transition:border-color .2s;}
+    .btn-outline:hover{border-color:rgba(255,255,255,.6);}
+    .hero-right{background:var(--cream);position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 3rem;}
+    .hero-deco-circle{width:280px;height:280px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:8rem;margin-bottom:2rem;position:relative;}
+    .hero-deco-circle::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(26,107,114,.15);}
+    .specialties{display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:280px;}
+    .spec-tag{background:var(--white);border:1px solid rgba(26,107,114,.12);padding:.6rem 1rem;display:flex;align-items:center;gap:.7rem;font-size:.83rem;color:var(--navy);}
+    .spec-tag span{font-size:1.1rem;}
+
+    /* STATS */
+    .stats{background:var(--teal);display:flex;justify-content:center;flex-wrap:wrap;}
+    .stat-box{flex:1;min-width:160px;max-width:220px;padding:2.2rem 1.5rem;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+    .stat-box:last-child{border-right:none;}
+    .stat-n{font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:#fff;font-weight:600;}
+    .stat-l{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:.3rem;}
+
+    /* SERVICIOS */
+    .servicios{padding:6rem 6%;}
+    .sec-label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:600;line-height:1.05;color:var(--navy);margin-bottom:3.5rem;}
+    .servicios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+    .serv-card{background:var(--white);border:1px solid rgba(15,35,64,.07);padding:2.2rem;transition:box-shadow .25s,transform .25s;}
+    .serv-card:hover{box-shadow:0 12px 40px rgba(15,35,64,.08);transform:translateY(-3px);}
+    .serv-icon{font-size:1.8rem;margin-bottom:1.2rem;}
+    .serv-nombre{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;}
+    .serv-desc{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;}
+    .serv-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--light);}
+    .serv-p{font-size:.95rem;font-weight:600;color:var(--teal);}
+    .serv-d{font-size:.75rem;color:var(--muted);}
+
+    /* INFO */
+    .info-section{background:var(--navy);padding:6rem 6%;display:flex;gap:5rem;flex-wrap:wrap;align-items:center;}
+    .info-text{flex:1;min-width:280px;}
+    .info-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:#fff;font-weight:600;line-height:1.1;margin-bottom:1.2rem;}
+    .info-text p{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.9;font-weight:300;}
+    .info-grid{flex:1;min-width:280px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);}
+    .info-box{background:rgba(255,255,255,.03);padding:1.8rem 1.5rem;}
+    .info-box h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem;}
+    .info-box p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6;}
+
+    /* CTA */
+    .cta-contact{padding:6rem 6%;display:flex;gap:4rem;flex-wrap:wrap;align-items:flex-start;}
+    .cta-main{flex:1;min-width:280px;}
+    .cta-main h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;line-height:1.05;margin-bottom:1rem;}
+    .cta-main p{color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:2rem;}
+    .wa-btn{display:inline-flex;align-items:center;gap:.7rem;background:#25d366;color:#fff;padding:.9rem 2.2rem;font-weight:700;font-size:.9rem;text-decoration:none;transition:opacity .2s;}
+    .wa-btn:hover{opacity:.88;}
+    .wa-btn svg{width:20px;height:20px;fill:currentColor;}
+    .cta-aside{flex:1;min-width:280px;}
+    .horario-box{background:var(--white);border:1px solid var(--light);padding:2rem;}
+    .horario-box h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy);margin-bottom:1.2rem;}
+    .hora-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--light);font-size:.87rem;}
+    .hora-row:last-child{border-bottom:none;}
+    .hora-row .dia{color:var(--muted);}
+    .hora-row .hora{color:var(--teal);font-weight:500;}
+
+    footer{border-top:1px solid rgba(15,35,64,.08);padding:1.8rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    footer p{font-size:.78rem;color:var(--muted);}
+
+    .demo-badge{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--teal2);padding:.5rem 1.3rem;border-radius:100px;font-size:.75rem;font-weight:600;letter-spacing:.08em;z-index:9998;text-decoration:none;white-space:nowrap;}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{padding:3rem 6%;min-height:350px;}
+      nav ul{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-name">Dra. Valeria Reyes</div>
+    <div class="logo-title">Medicina General · Nutrición Clínica</div>
+  </div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#cita">Cita</a></li>
+  </ul>
+  <a href="https://wa.me/527753602078?text=Hola%20Doctora!%20Quiero%20agendar%20una%20consulta." target="_blank" class="cita-btn">Agendar consulta</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Consultorio médico privado · Desde 2016</div>
+    <h1>Tu salud,<br/>nuestra<br/><em>prioridad.</em></h1>
+    <p class="hero-desc">Atención médica personalizada, con enfoque en medicina preventiva, nutrición y bienestar integral. En un ambiente de confianza y calidez humana.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/527753602078?text=Hola%20Doctora!%20Quiero%20agendar%20una%20consulta." target="_blank" class="btn-teal">Agendar consulta</a>
+      <a href="#servicios" class="btn-outline">Ver servicios →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-deco-circle">🩺</div>
+    <div class="specialties">
+      <div class="spec-tag"><span>🔬</span>Medicina General y Preventiva</div>
+      <div class="spec-tag"><span>🥗</span>Nutrición Clínica</div>
+      <div class="spec-tag"><span>💉</span>Aplicación de Vacunas</div>
+      <div class="spec-tag"><span>📋</span>Chequeos Médicos Completos</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-box"><div class="stat-n">2,300+</div><div class="stat-l">Pacientes atendidos</div></div>
+  <div class="stat-box"><div class="stat-n">8</div><div class="stat-l">Años de experiencia</div></div>
+  <div class="stat-box"><div class="stat-n">98%</div><div class="stat-l">Satisfacción del paciente</div></div>
+  <div class="stat-box"><div class="stat-n">5★</div><div class="stat-l">Calificación en Google</div></div>
+</div>
+
+<section id="servicios" class="servicios">
+  <div class="sec-label">Lo que ofrecemos</div>
+  <div class="sec-title">Servicios<br/>médicos</div>
+  <div class="servicios-grid">
+    <div class="serv-card">
+      <div class="serv-icon">🩺</div>
+      <div class="serv-nombre">Consulta General</div>
+      <p class="serv-desc">Diagnóstico, revisión de síntomas, prescripción médica y seguimiento personalizado.</p>
+      <div class="serv-footer"><span class="serv-p">$300</span><span class="serv-d">30 min</span></div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🥗</div>
+      <div class="serv-nombre">Consulta Nutricional</div>
+      <p class="serv-desc">Plan de alimentación personalizado, control de peso y manejo de enfermedades metabólicas.</p>
+      <div class="serv-footer"><span class="serv-p">$350</span><span class="serv-d">45 min</span></div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">📋</div>
+      <div class="serv-nombre">Chequeo Médico Completo</div>
+      <p class="serv-desc">Examen físico integral, revisión de laboratorios y recomendaciones preventivas.</p>
+      <div class="serv-footer"><span class="serv-p">$500</span><span class="serv-d">60 min</span></div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💉</div>
+      <div class="serv-nombre">Aplicación de Vacunas</div>
+      <p class="serv-desc">Vacunación para adultos y niños, calendario de vacunación y viajeros.</p>
+      <div class="serv-footer"><span class="serv-p">Consultar</span><span class="serv-d">15 min</span></div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🩸</div>
+      <div class="serv-nombre">Toma de Muestras</div>
+      <p class="serv-desc">Análisis de laboratorio clínico con resultados en 24 horas. Sin necesidad de acudir a laboratorio externo.</p>
+      <div class="serv-footer"><span class="serv-p">Desde $150</span><span class="serv-d">10 min</span></div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">👶</div>
+      <div class="serv-nombre">Consulta Pediátrica</div>
+      <p class="serv-desc">Atención médica para niños de 0 a 12 años. Revisión de crecimiento y desarrollo.</p>
+      <div class="serv-footer"><span class="serv-p">$320</span><span class="serv-d">35 min</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="info-section">
+  <div class="info-text">
+    <div class="sec-label" style="color:var(--sage)">Sobre el consultorio</div>
+    <h2>Un espacio diseñado para tu bienestar</h2>
+    <p>Creemos que la atención médica de calidad debe ser accesible, cálida y personalizada. En nuestro consultorio encontrarás tecnología de diagnóstico moderna combinada con el trato humano que mereces.</p>
+  </div>
+  <div class="info-grid">
+    <div class="info-box"><h4>🔬 Diagnóstico moderno</h4><p>Equipo actualizado para resultados precisos y confiables.</p></div>
+    <div class="info-box"><h4>🤝 Atención personalizada</h4><p>Cada paciente recibe atención dedicada y sin prisa.</p></div>
+    <div class="info-box"><h4>🔒 Expediente digital</h4><p>Historial clínico completo y privado, siempre disponible.</p></div>
+    <div class="info-box"><h4>📲 Seguimiento por WhatsApp</h4><p>Comunicación directa con tu médico entre consultas.</p></div>
+  </div>
+</section>
+
+<section id="cita" class="cta-contact">
+  <div class="cta-main">
+    <div class="sec-label">Agenda tu cita</div>
+    <h2>¿Cuándo nos vemos?</h2>
+    <p>Solicita tu cita por WhatsApp y te respondemos en menos de 30 minutos. También atendemos urgencias.</p>
+    <a href="https://wa.me/527753602078?text=Hola%20Doctora!%20Me%20gustar%C3%ADa%20agendar%20una%20consulta.%20%C2%BFQu%C3%A9%20horarios%20tiene%20disponibles?" target="_blank" class="wa-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Agendar por WhatsApp
+    </a>
+  </div>
+  <div class="cta-aside">
+    <div class="horario-box">
+      <h4>📅 Horarios de atención</h4>
+      <div class="hora-row"><span class="dia">Lunes – Viernes</span><span class="hora">9:00 – 19:00</span></div>
+      <div class="hora-row"><span class="dia">Sábado</span><span class="hora">9:00 – 14:00</span></div>
+      <div class="hora-row"><span class="dia">Domingo</span><span class="hora">Solo urgencias</span></div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">📍 Huasca de Ocampo, Hidalgo</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="logo-name" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);">Dra. Valeria Reyes</div>
+    <div class="logo-title" style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);">Medicina General · Nutrición</div>
+  </div>
+  <p>Lun–Sáb · Demo por DigiPyme · Huasca de Ocampo, Hidalgo</p>
+</footer>
+
+<a href="#" class="demo-badge">✦ Ejemplo DigiPyme — Quiero esta página</a>
+
+</body>
+</html>

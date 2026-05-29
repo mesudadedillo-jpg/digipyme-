@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sabor de México — Demo | DigiPyme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0d1108;--surface:#141a0c;--card:#1a2210;--green:#16a34a;--lime:#84cc16;--orange:#f97316;--yellow:#facc15;--cream:#faf7ed;--muted:#7a8a68;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(13,17,8,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(22,163,74,0.15);}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.05em;color:var(--yellow);}
+    nav ul{display:flex;gap:1.8rem;list-style:none;}
+    nav ul a{color:var(--muted);text-decoration:none;font-size:.88rem;transition:color .2s;}
+    nav ul a:hover{color:var(--cream);}
+    .pedir-btn{background:var(--green);color:#fff;padding:.5rem 1.2rem;border-radius:4px;font-weight:600;font-size:.85rem;text-decoration:none;transition:opacity .2s;}
+    .pedir-btn:hover{opacity:.85;}
+    .hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;padding:2rem 5% 4rem;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(249,115,22,.07),transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(22,163,74,.06),transparent 60%),linear-gradient(to bottom,transparent,rgba(13,17,8,.95));}
+    .hero-emoji{position:absolute;font-size:18rem;right:-3%;top:50%;transform:translateY(-50%);opacity:.12;pointer-events:none;user-select:none;}
+    .hero-content{position:relative;z-index:1;max-width:600px;}
+    .hero-tag{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem;}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,9rem);line-height:.92;letter-spacing:.02em;margin-bottom:1.2rem;}
+    .hero h1 .line2{color:var(--yellow);}
+    .hero h1 .line3{color:var(--orange);}
+    .hero p{color:var(--muted);font-size:1rem;margin-bottom:2rem;max-width:420px;font-weight:300;line-height:1.7;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-g{background:var(--green);color:#fff;padding:.85rem 2rem;border-radius:4px;text-decoration:none;font-weight:600;font-size:.95rem;transition:transform .2s;}
+    .btn-g:hover{transform:translateY(-2px);}
+    .btn-og{border:1px solid rgba(22,163,74,.3);color:var(--cream);padding:.85rem 2rem;border-radius:4px;text-decoration:none;font-size:.95rem;transition:border-color .2s;}
+    .btn-og:hover{border-color:var(--green);}
+    section{padding:5rem 5%;}
+    .sec-tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:.6rem;}
+    h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:.03em;margin-bottom:1rem;}
+    .promo-banner{background:var(--orange);color:#fff;text-align:center;padding:.8rem;font-weight:600;font-size:.9rem;letter-spacing:.04em;}
+    .menu-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+    .tab{padding:.45rem 1.1rem;border:1px solid rgba(22,163,74,.25);border-radius:100px;color:var(--muted);font-size:.83rem;cursor:pointer;transition:all .2s;background:none;}
+    .tab.active,.tab:hover{background:var(--green);color:#fff;border-color:var(--green);}
+    .antojitos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.2rem;}
+    .antojito{background:var(--card);border:1px solid rgba(22,163,74,.1);border-radius:10px;overflow:hidden;transition:transform .2s;cursor:pointer;}
+    .antojito:hover{transform:translateY(-3px);}
+    .ant-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+    .ant-info{padding:1rem;}
+    .ant-info h4{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em;margin-bottom:.3rem;}
+    .ant-info p{font-size:.82rem;color:var(--muted);margin-bottom:.6rem;}
+    .ant-footer{display:flex;justify-content:space-between;align-items:center;}
+    .ant-price{color:var(--yellow);font-weight:700;}
+    .ant-btn{background:var(--green);color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;font-size:.78rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
+    .ant-btn:hover{opacity:.85;}
+    .cta-box{background:var(--surface);border:1px solid rgba(22,163,74,.12);border-radius:16px;padding:3rem 2rem;text-align:center;max-width:600px;margin:0 auto;}
+    .cta-box h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.03em;margin-bottom:.8rem;}
+    .cta-box p{color:var(--muted);margin-bottom:1.8rem;}
+    .wa-btn{display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.85rem 2rem;border-radius:6px;font-weight:700;text-decoration:none;font-size:.95rem;transition:transform .2s;}
+    .wa-btn:hover{transform:translateY(-2px);}
+    .wa-btn svg{width:20px;height:20px;fill:currentColor;}
+    footer{border-top:1px solid rgba(22,163,74,.1);padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    footer p{font-size:.82rem;color:var(--muted);}
+    .demo-badge{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);border:1px solid rgba(22,163,74,.3);color:var(--lime);padding:.5rem 1.2rem;border-radius:100px;font-size:.78rem;font-weight:600;letter-spacing:.06em;z-index:999;text-decoration:none;white-space:nowrap;}
+    .toast{position:fixed;top:5rem;right:1.5rem;background:var(--green);color:#fff;padding:.7rem 1.3rem;border-radius:8px;font-size:.85rem;font-weight:600;transform:translateY(-10px);opacity:0;transition:all .3s;z-index:200;pointer-events:none;}
+    .toast.show{transform:translateY(0);opacity:1;}
+    @media(max-width:768px){nav ul{display:none;}.hero-emoji{font-size:8rem;opacity:.08;}}
+  </style>
+</head>
+<body>
+<div class="promo-banner">🌮 Lunes y Miércoles: 2x1 en tacos hasta las 3pm · Código: LUNES2X1</div>
+<nav>
+  <div class="logo">Sabor de México</div>
+  <ul>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#contacto">Pedir</a></li>
+  </ul>
+  <a href="https://wa.me/527753602078?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20Sabor%20de%20México." target="_blank" class="pedir-btn">Pedir ahora</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-emoji">🌮</div>
+  <div class="hero-content">
+    <div class="hero-tag">Antojitos mexicanos desde 2005</div>
+    <h1>
+      <span class="line1">SABOR</span><br/>
+      <span class="line2">DE</span><br/>
+      <span class="line3">MÉXICO</span>
+    </h1>
+    <p>Los mejores tacos, tamales, gorditas y antojitos de la región. Recetas de abuela, sazón de siempre.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-g">Ver Menú</a>
+      <a href="https://wa.me/527753602078?text=Hola!%20Quiero%20hacer%20un%20pedido%20para%20llevar." target="_blank" class="btn-og">Pedir para llevar →</a>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="sec-tag">Lo que más te va a gustar</div>
+  <h2>Menú del Día</h2>
+  <div class="menu-tabs">
+    <button class="tab active" onclick="filtMenu(this,'todos')">Todo</button>
+    <button class="tab" onclick="filtMenu(this,'tacos')">Tacos</button>
+    <button class="tab" onclick="filtMenu(this,'tamales')">Tamales</button>
+    <button class="tab" onclick="filtMenu(this,'gorditas')">Gorditas</button>
+    <button class="tab" onclick="filtMenu(this,'bebidas')">Bebidas</button>
+  </div>
+  <div class="antojitos-grid">
+    <div class="antojito" data-c="tacos"><div class="ant-img" style="background:linear-gradient(135deg,#1a2210,#16a34a)">🌮</div><div class="ant-info"><h4>Taco de Carnitas</h4><p>Tortilla de maíz, carnitas, cebolla, cilantro y salsa verde.</p><div class="ant-footer"><span class="ant-price">$20 c/u</span><button class="ant-btn" onclick="pedir('Tacos de Carnitas')">Pedir</button></div></div></div>
+    <div class="antojito" data-c="tacos"><div class="ant-img" style="background:linear-gradient(135deg,#2d1b0e,#f97316)">🌯</div><div class="ant-info"><h4>Taco Pastor</h4><p>Carne al pastor con piña, cebolla, cilantro y salsa roja.</p><div class="ant-footer"><span class="ant-price">$22 c/u</span><button class="ant-btn" onclick="pedir('Tacos al Pastor')">Pedir</button></div></div></div>
+    <div class="antojito" data-c="tamales"><div class="ant-img" style="background:linear-gradient(135deg,#1a2210,#3f6212)">🫔</div><div class="ant-info"><h4>Tamal Rojo</h4><p>Masa de maíz, mole rojo, pollo deshebrado. Calientito.</p><div class="ant-footer"><span class="ant-price">$25 c/u</span><button class="ant-btn" onclick="pedir('Tamales Rojos')">Pedir</button></div></div></div>
+    <div class="antojito" data-c="gorditas"><div class="ant-img" style="background:linear-gradient(135deg,#1c1003,#a16207)">🫓</div><div class="ant-info"><h4>Gordita de Chicharrón</h4><p>Masa gruesa con chicharrón prensado y salsa a elegir.</p><div class="ant-footer"><span class="ant-price">$30 c/u</span><button class="ant-btn" onclick="pedir('Gorditas de Chicharrón')">Pedir</button></div></div></div>
+    <div class="antojito" data-c="tamales"><div class="ant-img" style="background:linear-gradient(135deg,#0d1108,#15803d)">🌿</div><div class="ant-info"><h4>Tamal Verde</h4><p>Salsa verde, pollo y epazote. Receta de siempre.</p><div class="ant-footer"><span class="ant-price">$25 c/u</span><button class="ant-btn" onclick="pedir('Tamales Verdes')">Pedir</button></div></div></div>
+    <div class="antojito" data-c="bebidas"><div class="ant-img" style="background:linear-gradient(135deg,#1a0005,#dc2626)">🫙</div><div class="ant-info"><h4>Agua de Jamaica</h4><p>Jamaica natural, sin conservadores. El litro frío.</p><div class="ant-footer"><span class="ant-price">$30/L</span><button class="ant-btn" onclick="pedir('Agua de Jamaica')">Pedir</button></div></div></div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="cta-box">
+    <h3>¿Listo para pedir?</h3>
+    <p>Escríbenos tu pedido por WhatsApp. ¡Listo en 20 minutos para llevar!</p>
+    <a href="https://wa.me/527753602078?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20Sabor%20de%20México." target="_blank" class="wa-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Hacer mi pedido
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-family:'Bebas Neue',sans-serif;color:var(--yellow);">Sabor de México</div>
+  <p>Lunes–Domingo 8am–9pm · Demo por DigiPyme</p>
+</footer>
+
+<div class="toast" id="toast">✓ Abriendo WhatsApp...</div>
+<a href="../index.html#ejemplos" class="demo-badge">✦ Ejemplo DigiPyme — Quiero esta página</a>
+
+<script>
+  function filtMenu(btn,cat){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.antojito').forEach(a=>{
+      a.style.display=(cat==='todos'||a.dataset.c===cat)?'':'none';
+    });
+  }
+  function pedir(item){
+    const t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2000);
+    const msg=`Hola! Quiero pedir *${item}* en Sabor de México. ¿Cuánto tiempo de espera?`;
+    window.open(`https://wa.me/527753602078?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+</script>
+</body>
+</html>
